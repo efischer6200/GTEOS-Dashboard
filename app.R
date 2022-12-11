@@ -398,6 +398,9 @@ server = function(input, output, session) {
         proxy%>%addAwesomeMarkers(data =LakeZone2,group = "SLCT", lat = ~ Latitude, lng = ~ Longitude, icon = icons3 ,layerId = "SCLT", label=~as.character(GUIDE_LOCNAME_ENG),options = marker_options)
         }
       }
+      else {
+        proxy %>% clearGroup("SLCT")
+      }
     })
       
       # filters markers for advanced selection 
