@@ -71,7 +71,16 @@ icons2 <- awesomeIcons(
   library = 'fa',
   markerColor = 'black'
 )
+icons3 <- awesomeIcons(
+  icon = 'circle',
+  iconColor = "#FFFFFF",
+  library = 'fa',
+  markerColor = 'green'
+)
 
+marker_options <- markerOptions(
+  zIndexOffset = 1000
+)
 # DASHBOARD HEADER ############################################################### 
 
 header_img<-img(src="	https://www.oacph.ca/docs/new-government-of-ontario-logo/?bp-attachment=ON_POS_LOGO_RGB.png", height="55px") #image of gov ont
@@ -376,6 +385,20 @@ server = function(input, output, session) {
       }
     })
       
+      # adds selected lake marker
+    observe({
+      proxy <- leafletProxy("mymap")
+      if (input$FMZ>0 & input$LAKE!="") {
+      
+        LakeZone2 <- filter(FISHGUIDE_2020, FMZONE == input$FMZ)
+        LakeZone2 <- filter(LakeZone2, GUIDE_LOCNAME_ENG == input$LAKE)
+        LakeZone2 <-LakeZone2%>%distinct(GUIDE_LOCNAME_ENG, .keep_all = TRUE)
+        proxy %>% clearGroup("SLCT")
+        if (nrow(LakeZone2)>0){
+        proxy%>%addAwesomeMarkers(data =LakeZone2,group = "SLCT", lat = ~ Latitude, lng = ~ Longitude, icon = icons3 ,layerId = "SCLT", label=~as.character(GUIDE_LOCNAME_ENG),options = marker_options)
+        }
+      }
+    })
       
       # filters markers for advanced selection 
       observe({
