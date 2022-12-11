@@ -79,7 +79,7 @@ icons3 <- awesomeIcons(
 )
 
 marker_options <- markerOptions(
-  zIndexOffset = 1000
+  zIndexOffset = 100
 )
 # DASHBOARD HEADER ############################################################### 
 
