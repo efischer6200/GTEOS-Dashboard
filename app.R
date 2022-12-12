@@ -650,7 +650,7 @@ server = function(input, output, session) {
             #Change first to H1
             if(input$LAKE =="" | input$FISH=="" | input$FMZ ==""){
                 output$txt2<-renderText({
-                  "Select a zone and waterbody and fish to display consumption chart"
+                  "Select a zone, waterbody and fish to display consumption chart"
                 })
             }else{
               output$txt2<-renderText({
